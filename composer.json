@@ -1,0 +1,16 @@
+{
+    "name": "fizzday/ocrphp",
+    "authors": [
+        {
+            "name": "fizz",
+            "email": "864759073@qq.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Fizzday\\OcrPHP\\": "src/"
+        }
+    }
+}
