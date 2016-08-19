@@ -12,7 +12,7 @@ $file = __DIR__.'/test.jpg';
 
 if (!file_exists($file)) die('file not exists');
 
-//d(33);
+d(33);
 
 $getfile = OcrPHP::file($file);
 

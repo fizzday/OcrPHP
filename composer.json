@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "fizzday/fizzhelper": "*"
+        "fizzday/fizzhelper": "dev-master"
     },
     "autoload": {
         "psr-4": {

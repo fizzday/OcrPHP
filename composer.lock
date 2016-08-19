@@ -1,0 +1,62 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "7b586e75f2810c75944fbfb45b8b263e",
+    "content-hash": "09dd5e8f7d7759ed3a3e8024230bd744",
+    "packages": [
+        {
+            "name": "fizzday/fizzhelper",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fizzday/FizzHelper.git",
+                "reference": "e745fab1e88c9a364fc873744272277dfee3080d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/fizzday/FizzHelper/e745fab1e88c9a364fc873744272277dfee3080d.zip",
+                "reference": "e745fab1e88c9a364fc873744272277dfee3080d",
+                "shasum": ""
+            },
+            "type": "function",
+            "autoload": {
+                "psr-4": {
+                    "Fizzday\\FizzHelper\\": ""
+                },
+                "files": [
+                    "FizzHelper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "fizz",
+                    "email": "864759073@qq.com"
+                }
+            ],
+            "description": "the useful helpers for php that widely used",
+            "keywords": [
+                "helper",
+                "php",
+                "widely used"
+            ],
+            "time": "2016-08-19 04:19:14"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "fizzday/fizzhelper": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
