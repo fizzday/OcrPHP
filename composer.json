@@ -1,5 +1,9 @@
 {
     "name": "fizzday/ocrphp",
+    "description": "a simple and beautiful ocr php package which can easily recognize the image to words",
+    "keywords": ["tesseract-ocr", "php", "recognize"],
+    "license": "MIT",
+    "type": "library",
     "authors": [
         {
             "name": "fizz",
@@ -7,6 +11,7 @@
         }
     ],
     "require": {
+        "fizzday/fizzhelper": "*"
     },
     "autoload": {
         "psr-4": {

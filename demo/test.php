@@ -16,7 +16,7 @@ if (!file_exists($file)) die('file not exists');
 
 $getfile = OcrPHP::file($file);
 
-echo $getfile->run('id');
+echo $getfile->lang()->run();
 
 
 

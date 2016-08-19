@@ -4,12 +4,12 @@ namespace Fizzday\OcrPHP;
 /**
  * Class OcrPHP
  * 图像识别转换文字类
- * @author fizz
- * @email <864759073@qq.com>
- * @time 2016-08-18
+ * @author  fizz
+ * @email   <864759073@qq.com>
+ * @time    2016-08-18
  * @package Fizzday\OcrPHP
  *
- * @usage OcrPHP::file('/var/www/img/test.jpg')->lang(['eng', 'ch_sim'])->psm(3)->run('id');
+ * @usage   OcrPHP::file('/var/www/img/test.jpg')->lang(['eng', 'chi_sim'])->psm(3)->run('id');
  */
 
 class OcrPHP
@@ -18,13 +18,13 @@ class OcrPHP
      * 要识别的图片
      * @var string
      */
-    protected static $file    = '';
+    protected static $file = '';
 
     /**
      * 识别结果缓存目录
      * @var string
      */
-    protected static $cacheDir = __DIR__.'/cache/';
+    protected static $cacheDir = __DIR__ . '/cache/';
 
     /**
      * 识别对象的语言, 如: [eng, ch_sim, ch_tra]
@@ -49,7 +49,7 @@ class OcrPHP
      * @param string $type
      * @return string
      */
-    public static function run($type='')
+    public static function run($type = '')
     {
         // 执行识别
         static::recognize();
@@ -70,57 +70,31 @@ class OcrPHP
     }
 
     /**
-     * 设置图像源
-     * @param string $file
-     * @return bool|static
+     * 执行识别出内容
+     * @return static
      */
-    public static function file($file='')
+    protected static function recognize()
     {
-        if (empty($file)) return false;
+        $cmd = "tesseract ";
 
-        if (!file_exists($file)) return false;
+        // 检查参数
+        if (!empty(static::$lang)) {
+            $cmd .= "-l " . join("+", static::$lang);
+        }
+        if (!empty(static::$psm)) {
+            $cmd .= "-psm " . static::$psm;
+        }
 
-        static::$file = $file;
+        // 临时文件名字
+        static::$cacheDir = static::$cacheDir . mt_rand(100000, 999999);
+
+        // 执行识别
+        system($cmd . " " . static::$file . " " . static::$cacheDir);
+
+        // 保存结果
+        static::$result = file_get_contents(static::$cacheDir . '.txt');
 
         return new static();
-    }
-
-    /**
-     * 设置识别结果缓存目录(注意要可写)
-     * @param string $cacheDir
-     * @return bool|static
-     */
-    public static function cacheDir($cacheDir='')
-    {
-        if (empty($cacheDir)) return false;
-
-        if (!is_dir($cacheDir)) return false;
-
-        static::$cacheDir = rtrim($cacheDir, '/').'/';
-
-        return new static();
-    }
-
-    /**
-     * 设置识别对象的语言
-     * @param string $lang
-     */
-    public static function lang($lang='')
-    {
-            if (is_array($lang)) {
-                static::$lang = array_merge(static::$lang, $lang);
-            } else {
-                array_push(static::$lang, $lang);
-            }
-    }
-
-    /**
-     * 设置识别类型
-     * @param $psm
-     */
-    public static function psm($psm)
-    {
-        static::$psm = $psm;
     }
 
     /**
@@ -128,7 +102,7 @@ class OcrPHP
      * @param string $type
      * @return static
      */
-    protected static function checkType($type='')
+    protected static function checkType($type = '')
     {
         // 取出原始识别结果
         $data = static::$result;
@@ -147,44 +121,76 @@ class OcrPHP
     }
 
     /**
-     * 执行识别出内容
-     * @return static
+     * 初始化操作
      */
-    protected static function recognize()
+    protected static function reset()
     {
-        $cmd = "tesseract ";
+        unlink(static::$cacheDir . '.txt');
+        static::$file     = '';
+        static::$cacheDir = __DIR__ . '/cache/';
+        static::$lang     = [];
+        static::$psm      = '';
+        static::$result   = '';
+    }
 
-        // 检查参数
-        if (!empty(static::$lang)) {
-            $cmd .= "-l ".join(" ", static::$lang);
-        }
-        if (!empty(static::$psm)) {
-            $cmd .= "-psm ".static::$psm;
-        }
+    /**
+     * 设置图像源
+     * @param string $file
+     * @return bool|static
+     */
+    public static function file($file = '')
+    {
+        if (empty($file)) return false;
 
-        // 临时文件名字
-        static::$cacheDir = static::$cacheDir.mt_rand(100000, 999999);
+        if (!file_exists($file)) return false;
 
-        // 执行识别
-        system($cmd." ".static::$file." ".static::$cacheDir);
-
-        // 保存结果
-        static::$result = file_get_contents(static::$cacheDir.'.txt');
+        static::$file = $file;
 
         return new static();
     }
 
     /**
-     * 初始化操作
+     * 设置识别结果缓存目录(注意要可写)
+     * @param string $cacheDir
+     * @return bool|static
      */
-    protected static function reset()
+    public static function cacheDir($cacheDir = '')
     {
-        unlink(static::$cacheDir.'.txt');
-        static::$file    = '';
-        static::$cacheDir = __DIR__.'/cache/';
-        static::$lang = [];
-        static::$psm = '';
-        static::$result = '';
+        if (empty($cacheDir)) return false;
+
+        if (!is_dir($cacheDir)) return false;
+
+        static::$cacheDir = rtrim($cacheDir, '/') . '/';
+
+        return new static();
+    }
+
+    /**
+     * 设置识别对象的语言
+     * @param string $lang
+     */
+    public static function lang($lang = '')
+    {
+        if (!empty($lang)) {
+            if (is_array($lang)) {
+                static::$lang = array_merge(static::$lang, $lang);
+            } else {
+                array_push(static::$lang, $lang);
+            }
+        }
+
+        return new static();
+    }
+
+    /**
+     * 设置识别类型
+     * @param $psm
+     */
+    public static function psm($psm)
+    {
+        static::$psm = $psm;
+
+        return new static();
     }
 
 }
