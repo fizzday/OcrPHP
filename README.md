@@ -1,5 +1,5 @@
 # OcrPHP
-## describe
+## description
 a simple and beautiful ocr php package, can recognize image to text (
 一个简洁优雅的图像识别转换文字的php类库)
 
