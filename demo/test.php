@@ -12,11 +12,11 @@ $file = __DIR__.'/test.jpg';
 
 if (!file_exists($file)) die('file not exists');
 
-d(33);
+echo OcrPHP::file($file)->run('id');
 
-$getfile = OcrPHP::file($file);
+echo PHP_EOL;
 
-echo $getfile->lang()->run();
+echo OcrPHP::file($file)->lang('ch_sim')->run();
 
 
 

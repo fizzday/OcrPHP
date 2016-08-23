@@ -1,6 +1,7 @@
 # OcrPHP
 ## describe
-一个简洁优雅的图像识别转换文字的php类库
+a simple and beautiful ocr php library which is using for recognize image to text depend on tesseract-ocr (
+一个简洁优雅的图像识别转换文字的php类库, 须安装`tesseract-ocr`)
 
 ## 使用介绍
 [english document](https://github.com/fizzday/OcrPHP)  
