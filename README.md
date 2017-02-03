@@ -30,7 +30,7 @@ OcrPHP::file($file)->run();
 
 OcrPHP::file($file)->lang($lang)->psm($psm)->run($type);
 ```
-it shell like :
+it shall like :
 ```
 OcrPHP::file('/var/www/img/test.jpg')->lang('eng')->run();
 
@@ -43,7 +43,7 @@ OcrPHP::file('/var/www/img/test.jpg')->lang(['eng', 'chi_sim'])->psm(3)->run('id
 - `$file` -- the source file in local
 - `$lang` -- the recognize language , like english(eng), chinese(chi_sim or chi_tra) ......
 - `$psm`  -- the reconize type default 3
-- `$type` -- the Specific results like id_num, business card ......  which can return the info you need directly, default null, thie library have offered the id_num return , you just need the 'id' param in run() func
+- `$type` -- the Specific results like id_num, business card ......  which can return the info you need directly, default null, thie library have offered the id_num return , you just need the 'id' param in run() method
 
 
 
