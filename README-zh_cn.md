@@ -22,7 +22,7 @@ composer require fizzday/ocrphp
 
 ### 开始使用  
 ```
-use OcrPHP;
+use Fizzday\OcrPHP;
 
 OcrPHP::file($file)->run();
 
